@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "d0b85b94-9fed-4996-ac10-6c3c0d208114",
+		"name": "Flight Booking API Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49372268",
+		"_collection_link": "https://santoshipujari0710-2184681.postman.co/workspace/Santoshi-Pujari's-Workspace~12b06909-a2b3-4cdc-811f-df240a408563/collection/49372268-d0b85b94-9fed-4996-ac10-6c3c0d208114?action=share&source=collection_link&creator=49372268"
+	},
+	"item": [
+		{
+			"name": "Search Flights",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/flights/search?source=BOM&destination=DEL",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"flights",
+						"search"
+					],
+					"query": [
+						{
+							"key": "source",
+							"value": "BOM"
+						},
+						{
+							"key": "destination",
+							"value": "DEL"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search and Filter by Price",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const data = pm.response.json();\r",
+							"const sorted = data.sort((a, b) => a.price - b.price);\r",
+							"console.log(\"Flights sorted by price (ascending):\", sorted);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/flights/search?source=BOM&destination=DEL\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"flights",
+						"search"
+					],
+					"query": [
+						{
+							"key": "source",
+							"value": "BOM"
+						},
+						{
+							"key": "destination",
+							"value": "DEL\n"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Booking",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"fullName\": \"Santoshi Pujari\",\r\n    \"gender\": \"Female\",\r\n    \"age\": 23,\r\n    \"email\": \"santoshi@example.com\",\r\n    \"phone\": \"9876543210\"\r\n  }\r\n]\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/bookings/create/1\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"bookings",
+						"create",
+						"1\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Bookings",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
